@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "tasks")
-public class Task {
+@Table(name = "task_groups")
+public class TaskGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,16 +19,10 @@ public class Task {
     private String description;
     @Column(name = "done")
     private boolean done;
-    @Column(name = "deadline")
-    private LocalDateTime deadline;
-    @Embedded
-    private Audit audit = new Audit();
-    @ManyToOne
-    @JoinColumn(name = "task_group_id")
-    private TaskGroup group;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private Set<Task> tasks;
 
-
-    public Task() {
+    public TaskGroup() {
     }
 
     public int getId() {
@@ -53,27 +49,17 @@ public class Task {
         this.done = done;
     }
 
-    public LocalDateTime getDeadline() {
-        return deadline;
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public TaskGroup getGroup() {
-        return group;
-    }
-
-    public void setGroup(TaskGroup group) {
-        this.group = group;
-    }
-
-    public void updateFrom(Task source){
+    public void updateFrom(TaskGroup source){
         description = source.description;
         done = source.done;
-        deadline = source.deadline;
-        group = source.group;
     }
 
 
