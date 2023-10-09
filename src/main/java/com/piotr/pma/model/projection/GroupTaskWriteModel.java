@@ -1,6 +1,7 @@
 package com.piotr.pma.model.projection;
 
 import com.piotr.pma.model.Task;
+import com.piotr.pma.model.TaskGroup;
 import jakarta.persistence.Column;
 
 import java.time.LocalDateTime;
@@ -24,7 +25,7 @@ public class GroupTaskWriteModel {
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
-    public Task toTask(){
-        return new Task(description, deadline);
+    public Task toTask(TaskGroup group){
+        return new Task(description, deadline, group);
     }
 }

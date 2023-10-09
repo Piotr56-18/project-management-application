@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@Scope()
 public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
@@ -38,5 +36,6 @@ public class TaskGroupService {
         TaskGroup result = repository.findById(groupId)
                 .orElseThrow(()->new IllegalArgumentException("TaskGroup with given id not found"));
         result.setDone(!result.isDone());
+        repository.save(result);
     }
 }

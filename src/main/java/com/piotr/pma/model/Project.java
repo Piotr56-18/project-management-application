@@ -20,6 +20,9 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<ProjectStep> steps;
 
+    public Project() {
+    }
+
     public void setSteps(Set<ProjectStep> steps) {
         this.steps = steps;
     }
