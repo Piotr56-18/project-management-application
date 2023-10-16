@@ -8,6 +8,7 @@ import com.piotr.pma.model.TaskGroupRepository;
 import com.piotr.pma.model.projection.GroupReadModel;
 import com.piotr.pma.model.projection.GroupTaskWriteModel;
 import com.piotr.pma.model.projection.GroupWriteModel;
+import com.piotr.pma.model.projection.ProjectWriteModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,8 +33,8 @@ public class ProjectService {
         return repository.findAll();
     }
 
-    public Project save(Project toSave) {
-        return repository.save(toSave);
+    public Project save(ProjectWriteModel toSave) {
+        return repository.save(toSave.toProject());
     }
 
     public GroupReadModel createGroup(LocalDateTime deadline, int projectId) {
@@ -52,9 +53,9 @@ public class ProjectService {
                                                 task.setDeadline(deadline.plusDays(projectStep.getDaysToDeadline()));
                                                 return task;
                                             }
-                                    ).collect(Collectors.toSet())
+                                    ).collect(Collectors.toList())
                     );
-                    return service.createGroup(targetGroup);
+                    return service.createGroup(targetGroup, project);
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
     }
 }

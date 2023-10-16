@@ -1,13 +1,12 @@
 package com.piotr.pma.model.projection;
 
 import com.piotr.pma.model.Task;
-import jakarta.persistence.Column;
 
 public class GroupTaskReadModel {
     private String description;
     private boolean done;
 
-    public GroupTaskReadModel(Task source) {
+    GroupTaskReadModel(Task source) {
         description = source.getDescription();
         done = source.isDone();
     }
@@ -16,7 +15,7 @@ public class GroupTaskReadModel {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -24,7 +23,7 @@ public class GroupTaskReadModel {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(final boolean done) {
         this.done = done;
     }
 }

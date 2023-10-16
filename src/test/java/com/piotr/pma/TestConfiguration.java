@@ -70,6 +70,11 @@ public class TestConfiguration {
             }
 
             @Override
+            public List<Task> findAllByGroup_Id(Integer groupId) {
+                return List.of();
+            }
+
+            @Override
             public Page<Task> findAll(Pageable pageable) {
                 return null;
             }

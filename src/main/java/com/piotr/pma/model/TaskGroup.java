@@ -12,12 +12,9 @@ import java.util.Set;
 public class TaskGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
-    @Column(name = "description")
-    @NotBlank(message = "Task's description can't be empty!")
+    @NotBlank(message = "Task group's description must not be empty")
     private String description;
-    @Column(name = "done")
     private boolean done;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
     private Set<Task> tasks;
@@ -32,7 +29,7 @@ public class TaskGroup {
         return id;
     }
 
-    public void setId(int id) {
+    void setId(final int id) {
         this.id = id;
     }
 
@@ -40,7 +37,7 @@ public class TaskGroup {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -48,7 +45,7 @@ public class TaskGroup {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(final boolean done) {
         this.done = done;
     }
 
@@ -56,7 +53,7 @@ public class TaskGroup {
         return tasks;
     }
 
-    public void setTasks(Set<Task> tasks) {
+    public void setTasks(final Set<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -64,14 +61,7 @@ public class TaskGroup {
         return project;
     }
 
-    public void setProject(Project project) {
+    public void setProject(final Project project) {
         this.project = project;
     }
-
-    public void updateFrom(TaskGroup source){
-        description = source.description;
-        done = source.done;
-    }
-
-
 }
